@@ -40,7 +40,7 @@ class DomainController extends Controller
         Domain::create(
           
             $request->validate([
-                'url' => 'required|unique:domains|max:255',
+                'name' => 'required|unique:domains|max:255',
                 'score' => 'required',
             ])
         );
@@ -80,12 +80,12 @@ class DomainController extends Controller
      */
     public function update(Request $request, Domain $domain)
     {
-        
+        // dd(request());
         
         $domain->update([
 
             
-            "url" => request("url"),
+            "name" => request("name"),
             "score" =>request("score")
 
         ]);

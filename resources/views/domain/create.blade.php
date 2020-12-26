@@ -7,11 +7,11 @@
         @csrf()
         @method('post')
         <div class="form-group">
-            <label for="domainUrl">Domain Url</label>
-            <input name="url" id="domainUrl" class="form-control" type="text" placeholder="Default input" required value="{{old('url')}}">
+            <label for="domainName">Domain name</label>
+            <input name="name" id="domainName" class="form-control" type="text" placeholder="Default input" required value="{{old('name')}}">
         </div>
 
-        @error('url')
+        @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 

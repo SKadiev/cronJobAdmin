@@ -5,8 +5,8 @@
     <table class="table table-dark">
         <thead>
             <tr>
-                <th scope="col">Domain Url</th>
-                <th scope="col">Domain score</th>
+                <th scope="col">Domain Name</th>
+                <th scope="col">Domain Score</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
 
@@ -17,7 +17,7 @@
             @foreach($domains as $key => $domain)
 
             <tr>
-                <td>{{$domain->url}}</td>
+                <td>{{$domain->name}}</td>
                 <td>{{$domain->score}}</td>
                 <td><a href="/domain/{{$domain->id}}/edit" class="btn btn-primary " role="button">Edit Domain</a></td>
                 <td>
