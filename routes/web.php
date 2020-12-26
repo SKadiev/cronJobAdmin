@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\DomainController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('domain', DomainController::class)->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('users', [UsersController::class, 'index']);

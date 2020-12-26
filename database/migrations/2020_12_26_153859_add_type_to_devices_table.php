@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeviceTable extends Migration
+class AddTypeToDevicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDeviceTable extends Migration
      */
     public function up()
     {
-        Schema::create('device', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::table('devices', function (Blueprint $table) {
+            //
+            $table->string('type');
         });
     }
 
@@ -26,6 +26,8 @@ class CreateDeviceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device');
+        Schema::table('devices', function (Blueprint $table) {
+            //
+        });
     }
 }

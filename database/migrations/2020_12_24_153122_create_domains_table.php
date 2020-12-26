@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePageTable extends Migration
+class CreateDomainsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePageTable extends Migration
      */
     public function up()
     {
-        Schema::create('page', function (Blueprint $table) {
+        Schema::create('domains', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('body');
+            $table->string('url');
+            $table->string('score');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreatePageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('page');
+        Schema::dropIfExists('domains');
     }
 }

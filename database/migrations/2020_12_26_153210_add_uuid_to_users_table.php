@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDomainTable extends Migration
+class AddUuidToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateDomainTable extends Migration
      */
     public function up()
     {
-        Schema::create('domain', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('url');
-            $table->string('score');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            //
+            $table->string('uuid')->default(rand(0,10));
         });
     }
 
@@ -28,6 +26,8 @@ class CreateDomainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domain');
+        Schema::table('user', function (Blueprint $table) {
+            //
+        });
     }
 }

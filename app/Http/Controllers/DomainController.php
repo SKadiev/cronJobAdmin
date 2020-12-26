@@ -14,7 +14,7 @@ class DomainController extends Controller
      */
     public function index()
     {
-        //
+        return view("domain.index",["domains" => Domain::all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class DomainController extends Controller
      */
     public function create()
     {
-        //
+        return view('domain.create');
     }
 
     /**
@@ -35,7 +35,19 @@ class DomainController extends Controller
      */
     public function store(Request $request)
     {
+
+      
         //
+        // dd(request());
+        Domain::create(
+          
+            $request->validate([
+                'url' => 'required|unique:domains|max:255',
+                'score' => 'required',
+            ])
+        );
+
+        return redirect()->action([DomainController::class, 'index']);
     }
 
     /**
@@ -46,7 +58,8 @@ class DomainController extends Controller
      */
     public function show(Domain $domain)
     {
-        //
+        dd(Domain::all());
+
     }
 
     /**
@@ -57,7 +70,7 @@ class DomainController extends Controller
      */
     public function edit(Domain $domain)
     {
-        //
+        return view('domain.edit', ["domain"=> $domain]);
     }
 
     /**
@@ -69,7 +82,18 @@ class DomainController extends Controller
      */
     public function update(Request $request, Domain $domain)
     {
-        //
+        
+        
+        $domain->update([
+
+            
+            "url" => request("url"),
+            "score" =>request("score")
+
+        ]);
+
+        return redirect()->action([DomainController::class, 'index']);
+
     }
 
     /**
@@ -81,5 +105,8 @@ class DomainController extends Controller
     public function destroy(Domain $domain)
     {
         //
+        $domain->delete();
+        return redirect()->action([DomainController::class, 'index']);
+
     }
 }
