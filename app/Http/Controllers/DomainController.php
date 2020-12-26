@@ -36,9 +36,7 @@ class DomainController extends Controller
     public function store(Request $request)
     {
 
-      
-        //
-        // dd(request());
+       
         Domain::create(
           
             $request->validate([
@@ -104,7 +102,6 @@ class DomainController extends Controller
      */
     public function destroy(Domain $domain)
     {
-        //
         $domain->delete();
         return redirect()->action([DomainController::class, 'index']);
 

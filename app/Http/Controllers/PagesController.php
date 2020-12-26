@@ -15,6 +15,8 @@ class PagesController extends Controller
     public function index()
     {
         //
+        return view("page.index",["pages" => Page::all()]);
+
     }
 
     /**
@@ -25,6 +27,9 @@ class PagesController extends Controller
     public function create()
     {
         //
+
+        return view('page.create');
+
     }
 
     /**
@@ -35,7 +40,15 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Page::create(
+          
+            $request->validate([
+                'body' => 'required|unique:pages|max:1500',
+              
+            ])
+        );
+
+        return redirect()->action([PagesController::class, 'index']);
     }
 
     /**
@@ -57,7 +70,10 @@ class PagesController extends Controller
      */
     public function edit(Page $page)
     {
-        //
+        return view('page.edit', ["page"=> $page]);
+
+        
+
     }
 
     /**
@@ -69,7 +85,17 @@ class PagesController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        //
+        
+          
+        $page->update([
+            
+            "body" => request("body"),
+    
+
+        ]);
+
+        return redirect()->action([PagesController::class, 'index']);
+
     }
 
     /**
@@ -80,6 +106,8 @@ class PagesController extends Controller
      */
     public function destroy(Page $page)
     {
-        //
+        $page->delete();
+        return redirect()->action([PagesController::class, 'index']);
+
     }
 }

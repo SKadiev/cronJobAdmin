@@ -46,9 +46,9 @@
                         Pages
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Pages</a>
-                        <a class="dropdown-item" href="#">Create Page </a>
-                        <a class="dropdown-item" href="#">Edit Page</a>
+                        <a class="dropdown-item" href="/page">Pages</a>
+                        <a class="dropdown-item" href="/page/create">Create Page </a>
+                        <a class="dropdown-item" href="/page/edit">Edit Page</a>
                     </div>
                 </div>
                 @endif
