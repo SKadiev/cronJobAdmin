@@ -37,8 +37,6 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/domain">Domains</a>
                         <a class="dropdown-item" href="/domain/create">Create Domain </a>
-                        <a class="dropdown-item" href="/domain/edit">Edit Domain</a>
-                        {{-- <a class="dropdown-item" href="#">Delete Domain</a> --}}
                     </div>
                 </div>
                 <div class="dropdown navbar-brand">
@@ -48,7 +46,6 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/page">Pages</a>
                         <a class="dropdown-item" href="/page/create">Create Page </a>
-                        <a class="dropdown-item" href="/page/edit">Edit Page</a>
                     </div>
                 </div>
                 @endif
