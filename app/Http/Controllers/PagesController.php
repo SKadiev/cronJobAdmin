@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -14,8 +15,12 @@ class PagesController extends Controller
      */
     public function index()
     {
-        //
-        return view("page.index",["pages" => Page::all()]);
+        $pages = DB::table('pages')
+            ->leftJoin('domains', 'pages.domain_id', '=', 'domains.id')
+            ->select('pages.id', 'domains.name', 'pages.body')
+            ->get();
+            
+        return view("page.index",["pages" => $pages]);
 
     }
 
@@ -72,8 +77,6 @@ class PagesController extends Controller
     {
         return view('page.edit', ["page"=> $page]);
 
-        
-
     }
 
     /**
@@ -110,4 +113,27 @@ class PagesController extends Controller
         return redirect()->action([PagesController::class, 'index']);
 
     }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = "";
+            $domains = DB::table('domains')->where('name','LIKE','%'.$request->search."%")->get();
+            dd($domains);
+            // if ($domains) {
+
+            //     foreach ($domains as $key => $domain) {
+            //         $output.='<tr>'.
+            //         '<td>'.$product->id.'</td>'.
+            //         '<td>'.$domain->title.'</td>'.
+            //         '<td>'.$product->description.'</td>'.
+            //         '<td>'.$product->price.'</td>'.
+            //         '</tr>';
+            //         }
+            //     return Response($output);
+
+            // }
+        }
+    }
+
 }

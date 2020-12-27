@@ -14,6 +14,7 @@ class DomainController extends Controller
      */
     public function index()
     {
+
         return view("domain.index",["domains" => Domain::all()]);
     }
 
@@ -68,6 +69,7 @@ class DomainController extends Controller
      */
     public function edit(Domain $domain)
     {
+
         return view('domain.edit', ["domain"=> $domain]);
     }
 
@@ -80,8 +82,6 @@ class DomainController extends Controller
      */
     public function update(Request $request, Domain $domain)
     {
-        // dd(request());
-        
         $domain->update([
 
             

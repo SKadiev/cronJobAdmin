@@ -8,9 +8,9 @@
         <thead>
             <tr>
                 <th scope="col">Page body</th>
+                <th scope="col">Domain name</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
-
             </tr>
         </thead>
         <tbody>
@@ -19,6 +19,7 @@
 
             <tr>
                 <td>{{$page->body}}</td>
+                <td>{{($page->name)}} </td>
                 <td><a href="/page/{{$page->id}}/edit" class="btn btn-secondary " role="button">Edit Page</a></td>
                 <td>
                     <form method="POST" action="/page/{{$page->id}}">
