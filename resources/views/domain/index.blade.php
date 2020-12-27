@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">
+    <a href="/domain/create" class="btn btn-secondary  mb-2 mr-2 pull-right" role="button">Create domain</a>
+
     <table class="table table-dark">
         <thead>
             <tr>
@@ -19,12 +21,12 @@
             <tr>
                 <td>{{$domain->name}}</td>
                 <td>{{$domain->score}}</td>
-                <td><a href="/domain/{{$domain->id}}/edit" class="btn btn-primary " role="button">Edit Domain</a></td>
+                <td><a href="/domain/{{$domain->id}}/edit" class="btn btn-secondary " role="button">Edit Domain</a></td>
                 <td>
                     <form method="POST" action="/domain/{{$domain->id}}">
                         @csrf()
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary">Delete</button>
+                        <button type="submit" class="btn btn-secondary">Delete</button>
 
                     </form>
                 </td>

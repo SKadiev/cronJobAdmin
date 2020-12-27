@@ -29,26 +29,12 @@
 
                 @if(Auth::user())
 
-                <div class="dropdown navbar-brand">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="domainDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Domains
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/domain">Domains</a>
-                        <a class="dropdown-item" href="/domain/create">Create Domain </a>
-                    </div>
-                </div>
-                <div class="dropdown navbar-brand">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="domainDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pages
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/page">Pages</a>
-                        <a class="dropdown-item" href="/page/create">Create Page </a>
-                    </div>
-                </div>
-                @endif
+                <a href="/domain" class="btn btn-secondary  mr-2 " role="button">Domains</a>
 
+                <a href="/page" class="btn btn-secondary  mr-2 " role="button">Pages</a>
+
+
+                @endif
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
