@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Domain;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
@@ -101,9 +102,19 @@ class DomainController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Domain $domain)
-    {
+    {   $reletedPages = Page::all()->where('domain_id', $domain->id);
+        
+        if (count($reletedPages) > 0) {
+            foreach ($reletedPages as $page) {
+                $page->delete();
+            }
+
+        }
+        
         $domain->delete();
         return redirect()->action([DomainController::class, 'index']);
 
     }
+    
+    
 }

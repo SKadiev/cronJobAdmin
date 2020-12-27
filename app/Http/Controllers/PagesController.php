@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Domain;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,9 +32,10 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
-
-        return view('page.create');
+        
+        $domains = Domain::pluck('name', 'id');
+      
+        return view('page.create', (compact('domains')));
 
     }
 
@@ -49,7 +51,8 @@ class PagesController extends Controller
           
             $request->validate([
                 'body' => 'required|unique:pages|max:1500',
-              
+                'domain_id' => 'required',
+
             ])
         );
 
@@ -75,7 +78,10 @@ class PagesController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('page.edit', ["page"=> $page]);
+        
+        $domains = Domain::pluck('name', 'id');
+
+        return view('page.edit', (compact('page', 'domains')));
 
     }
 
@@ -91,9 +97,8 @@ class PagesController extends Controller
         
           
         $page->update([
-            
             "body" => request("body"),
-    
+            "domain_id" => request("domain_id")
 
         ]);
 
@@ -113,6 +118,8 @@ class PagesController extends Controller
         return redirect()->action([PagesController::class, 'index']);
 
     }
+
+   
 
     public function search(Request $request)
     {

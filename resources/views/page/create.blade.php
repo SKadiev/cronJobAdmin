@@ -15,10 +15,14 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
-        </form>
+        <select class="form-control mb-2" name="domain_id" required>
+            <option selected>Select Domain</option>
+            @foreach ($domains as $key => $domain)
+            <option value="{{ $key }}">
+                {{ $domain }}
+            </option>
+            @endforeach
+        </select>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

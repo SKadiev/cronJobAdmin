@@ -15,6 +15,8 @@
         </thead>
         <tbody>
 
+
+
             @foreach($pages as $key => $page)
 
             <tr>

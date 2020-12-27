@@ -26,7 +26,7 @@
                     <form method="POST" action="/domain/{{$domain->id}}">
                         @csrf()
                         @method('DELETE')
-                        <button type="submit" class="btn btn-secondary">Delete</button>
+                        <button onclick="return confirm('Are you sure? You will lose related pages data')" type="submit" class="btn btn-secondary">Delete</button>
 
                     </form>
                 </td>
