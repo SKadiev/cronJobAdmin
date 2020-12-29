@@ -14,8 +14,8 @@ class AddUuidToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
-            $table->string('uuid')->default(rand(0,10));
+            $table->unsignedBigInteger('device_id');
+            $table->foreign('device_id')->references('id')->on('devices');
         });
     }
 

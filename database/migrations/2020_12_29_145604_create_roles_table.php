@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDomainIdToPageTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddDomainIdToPageTable extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
-
-            $table->unsignedBigInteger('domain_id');
-            $table->foreign('domain_id')->references('id')->on('domains');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
         });
     }
 
@@ -27,8 +26,6 @@ class AddDomainIdToPageTable extends Migration
      */
     public function down()
     {
-        Schema::table('pages', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('roles');
     }
 }

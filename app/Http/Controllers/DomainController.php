@@ -6,7 +6,7 @@ use App\Models\Domain;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
-class DomainController extends Controller
+class DomainsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -47,7 +47,7 @@ class DomainController extends Controller
             ])
         );
 
-        return redirect()->action([DomainController::class, 'index']);
+        return redirect()->action([DomainsController::class, 'index']);
     }
 
     /**
@@ -91,7 +91,7 @@ class DomainController extends Controller
 
         ]);
 
-        return redirect()->action([DomainController::class, 'index']);
+        return redirect()->action([DomainsController::class, 'index']);
 
     }
 
@@ -112,7 +112,7 @@ class DomainController extends Controller
         }
         
         $domain->delete();
-        return redirect()->action([DomainController::class, 'index']);
+        return redirect()->action([DomainsController::class, 'index']);
 
     }
     
