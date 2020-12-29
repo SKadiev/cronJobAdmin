@@ -13,5 +13,5 @@ class Page extends Model
 
     public function domain() {
         return  $this->belongsTo(Domain::class);
-     }
+    }
 }
