@@ -67,16 +67,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-        $device =  Device::create([
-            'uuid' => $data['device_id'],
-            'type' => 'browser'
-        ]);
+        $newDeviceId;
+        $deviceInDb = (Device::where('uuid', $data['device_id'])->first());
+        if (!$deviceInDb) {
+            $newDevice =  Device::create([
+                'uuid' => $data['device_id'],
+                'type' => 'browser'
+            ]);
             
+            $newDeviceId = $newDevice->id;
+
+        }  else {
+            $newDeviceId = $deviceInDb->id;
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'device_id' => $device->id,
+            'device_id' => $newDeviceId,
             'roles_id' => 1
         ]);
     }
