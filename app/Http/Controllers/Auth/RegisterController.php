@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DevicesController;
 use App\Providers\RouteServiceProvider;
+use App\Models\Device;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -53,7 +56,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'device_id' => ['required', 'unique:device_id'],
         ]);
     }
 
@@ -64,19 +66,18 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
-       
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'device_id' => rand(1,1000)
+    {   
+        $device =  Device::create([
+            'uuid' => $data['device_id'],
+            'type' => 'browser'
         ]);
+            
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'device_id' => rand(1,1000)
+            'device_id' => $device->id,
+            'roles_id' => 1
         ]);
     }
 }

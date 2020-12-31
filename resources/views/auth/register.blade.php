@@ -61,6 +61,8 @@
                             </div>
                         </div>
 
+                        <input id="deviceUuid" type="hidden" name="device_id" value="{{ old('deviceUuid') }}" required ">
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-secondary">
@@ -74,4 +76,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    let uuid;
+    setTimeout(() => {
+         uuid = new DeviceUUID().get();
+        console.log(uuid);
+        document.getElementById('deviceUuid').value = uuid;
+    }, 100);
+</script>
 @endsection

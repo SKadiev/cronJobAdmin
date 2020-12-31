@@ -9,6 +9,8 @@ class Device extends Model
 {
     use HasFactory;
 
+    protected $fillable  = ['uuid', 'type'];
+
     public function user () {
 
         return $this->belongsTo(User::class);

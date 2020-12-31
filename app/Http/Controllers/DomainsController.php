@@ -85,7 +85,6 @@ class DomainsController extends Controller
     {
         $domain->update([
 
-            
             "name" => request("name"),
             "score" =>request("score")
 

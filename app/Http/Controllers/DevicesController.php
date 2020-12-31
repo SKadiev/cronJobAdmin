@@ -24,7 +24,7 @@ class DevicesController extends Controller
      */
     public function create()
     {
-        //
+        dd('dasdasda');
     }
 
     /**
