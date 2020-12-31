@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Helpers\DeviceDetect;
+use  App\Facade\DeviceDetectFacade;
 
 class DeviceDetectServiceProvider extends ServiceProvider
 {
@@ -13,8 +15,8 @@ class DeviceDetectServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Connection::class, function ($app) {
-            return new Connection(config('riak'));
+        $this->app->bind( DeviceDetect::class, function ($app) {
+            return new DeviceDetect;
         });
     }
 
