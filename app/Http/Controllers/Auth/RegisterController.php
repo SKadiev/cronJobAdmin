@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use DeviceDetect;
 
 class RegisterController extends Controller
 {
@@ -67,24 +68,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-        $newDeviceId;
-        $deviceInDb = (Device::where('uuid', $data['device_id'])->first());
-        if (!$deviceInDb) {
-            $newDevice =  Device::create([
-                'uuid' => $data['device_id'],
-                'type' => 'browser'
-            ]);
-            
-            $newDeviceId = $newDevice->id;
 
-        }  else {
-            $newDeviceId = $deviceInDb->id;
-        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'device_id' => $newDeviceId,
             'roles_id' => 1
         ]);
     }

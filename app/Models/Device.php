@@ -9,7 +9,7 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $fillable  = ['uuid', 'type'];
+    protected $fillable  = ['uuid', 'type', 'user_id'];
 
     public function user () {
 

@@ -101,7 +101,8 @@ class DomainsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Domain $domain)
-    {   $reletedPages = Page::all()->where('domain_id', $domain->id);
+    {  
+         $reletedPages = Page::all()->where('domain_id', $domain->id);
         
         if (count($reletedPages) > 0) {
             foreach ($reletedPages as $page) {

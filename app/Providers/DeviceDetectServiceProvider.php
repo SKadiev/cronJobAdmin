@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\DeviceDetect;
 use  App\Facade\DeviceDetectFacade;
+use App\Models\Device;
 
 class DeviceDetectServiceProvider extends ServiceProvider
 {

@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <input id="deviceUuid" type="hidden" name="device_id" value="{{ old('deviceUuid') }}" required ">
+                        <input id="deviceUuid" type="hidden" name="device_uuid" value="{{ old('deviceUuid') }}" required ">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

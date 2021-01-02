@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use DeviceDetect;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        dd( Auth::user()->devices()->get());
+
+        DeviceDetect::resolveOrCreateDevice('dsasds',  Auth::user()->id);
+
+       
         return view('home');
     }
 }
