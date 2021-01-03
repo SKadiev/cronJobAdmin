@@ -102,6 +102,8 @@ class DomainsController extends Controller
      */
     public function destroy(Domain $domain)
     {  
+
+        $this->authorize('delete', $domain);
          $reletedPages = Page::all()->where('domain_id', $domain->id);
         
         if (count($reletedPages) > 0) {

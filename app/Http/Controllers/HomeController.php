@@ -22,13 +22,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        dd( Auth::user()->devices()->get());
+      
 
         DeviceDetect::resolveOrCreateDevice('dsasds',  Auth::user()->id);
 
-       
         return view('home');
     }
 }

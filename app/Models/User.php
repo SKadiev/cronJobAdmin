@@ -47,5 +47,16 @@ class User extends Authenticatable
         return $this->hasMany(Device::class);
     }
 
+    public function roleAuthorizationForDomain () {
+
+        $role = $this->hasOne(Role::class, 'id')->first()->name;
+        switch ($role) {
+            case 'admin': return true;
+            default: return false;
+
+        }
+        
+    }
+
    
 }

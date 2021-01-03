@@ -22,6 +22,9 @@
                 <td>{{$domain->name}}</td>
                 <td>{{$domain->score}}</td>
                 <td><a href="/domain/{{$domain->id}}/edit" class="btn btn-secondary " role="button">Edit Domain</a></td>
+                
+                {{-- @can('delete-domain', $domain) --}}
+
                 <td>
                     <form method="POST" action="/domain/{{$domain->id}}">
                         @csrf()
@@ -30,6 +33,9 @@
 
                     </form>
                 </td>
+                
+                {{-- @endcan --}}
+
 
             </tr>
             @endforeach

@@ -9,11 +9,11 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = ['name'];
 
-    public function user() {
-        return  $this->belongsTo(User::class);
+    public function users() {
+        return  $this->hasMany(User::class);
     }
 }
