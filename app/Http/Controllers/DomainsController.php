@@ -102,18 +102,8 @@ class DomainsController extends Controller
      */
     public function destroy(Domain $domain)
     {  
-
         $this->authorize('delete', $domain);
-         $reletedPages = Page::all()->where('domain_id', $domain->id);
-        
-        if (count($reletedPages) > 0) {
-            foreach ($reletedPages as $page) {
-                $page->delete();
-            }
-
-        }
-        
-        $domain->delete();
+        $domain->removeCascade();
         return redirect()->action([DomainsController::class, 'index']);
 
     }

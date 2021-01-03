@@ -14,4 +14,21 @@ class Domain extends Model
     public function pages() {
        return  $this->hasMany(Page::class);
     }
+
+    public function removeCascade () {
+
+        $this->removePagesCascade();
+        $this->delete();
+    }
+
+    public function removePagesCascade() {
+
+        $reletedPages = $this->pages()->get();
+        if (count($reletedPages) > 0) {
+            foreach ($reletedPages as $page) {
+                $page->delete();
+            }
+
+        }
+    }
 }
