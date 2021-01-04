@@ -25,8 +25,8 @@ Auth::routes();
 
 Route::resource('domain', DomainsController::class)->middleware('auth');
 Route::resource('page', PagesController::class)->middleware('auth');
-Route::get('device',[ DevicesController::class , 'index'])->middleware('auth');
+Route::resource('device', DevicesController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('users', [UsersController::class, 'index']);
+Route::get('user', [UsersController::class, 'index']);

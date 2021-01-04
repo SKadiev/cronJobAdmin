@@ -33,6 +33,8 @@
 
                 @if(Auth::user())
 
+                <a href="/user" class="btn btn-secondary  mr-2 " role="button">Users</a>
+
                 <a href="/domain" class="btn btn-secondary  mr-2 " role="button">Domains</a>
 
                 <a href="/page" class="btn btn-secondary  mr-2 " role="button">Pages</a>

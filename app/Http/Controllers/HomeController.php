@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
       
 
-        DeviceDetect::resolveOrCreateDevice('dsasds',  Auth::user()->id);
+        DeviceDetect::resolveOrCreateDevice('dsaaaaasds',  Auth::user()->id);
 
         return view('home');
     }

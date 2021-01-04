@@ -82,6 +82,7 @@ class DevicesController extends Controller
      */
     public function destroy(Device $device)
     {
-        //
+        $device->delete();
+        return redirect()->action([DevicesController::class, 'index']);
     }
 }
