@@ -2,16 +2,15 @@
 namespace App\Services;
 use App\Models\Device;
 use App\Models\User;
-
+use DB;
 class DeviceByUser
 
 {
 
     public function deviceByUser (User $user)    {
 
-        $roleNameForUser = ($user->roleName->name);
-
-        switch ($roleNameForUser) {
+        $roleForUser = ($user->role->name);
+        switch ($roleForUser) {
             case 'admin':  return $this->adminDevices();
 
             default : return $this->devicesForRegularUser($user);
@@ -21,7 +20,13 @@ class DeviceByUser
     }
 
     private function adminDevices () {
-        return Device::all();
+
+        $devices = DB::table('devices')
+            ->leftJoin('users', 'devices.user_id', '=', 'users.id')
+            ->select('devices.type', 'devices.id', 'users.name')
+            ->get();
+            
+        return $devices;
 
     }
 

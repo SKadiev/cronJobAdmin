@@ -46,7 +46,7 @@ class User extends Authenticatable
         return $this->hasMany(Device::class);
     }
 
-    public function roleName () {
+    public function role () {
         return $this->hasOne(Role::class, 'id');
     }
 

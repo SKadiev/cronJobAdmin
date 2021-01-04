@@ -23,9 +23,10 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        $devicesForUser = $this->deviceByUserService->deviceByUser(Auth::user());
-        // dd($devicesForUser);
-        return view("device.index",["devices" => $devicesForUser]);
+        $user = Auth::user();
+        $userRole = $user->role->name;
+        $devicesForUser = $this->deviceByUserService->deviceByUser($user);
+        return view("device.index",["devices" => $devicesForUser, "userRole" => $userRole]);
 
     }
 
