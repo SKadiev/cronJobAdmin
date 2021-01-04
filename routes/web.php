@@ -4,6 +4,7 @@ use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DevicesController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Auth::routes();
 
 Route::resource('domain', DomainsController::class)->middleware('auth');
 Route::resource('page', PagesController::class)->middleware('auth');
+Route::get('device',[ DevicesController::class , 'index'])->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

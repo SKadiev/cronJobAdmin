@@ -37,6 +37,7 @@
 
                 <a href="/page" class="btn btn-secondary  mr-2 " role="button">Pages</a>
 
+                <a href="/device" class="btn btn-secondary  mr-2 " role="button">Devices</a>
 
                 @endif
 

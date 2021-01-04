@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use Auth;
 use Illuminate\Http\Request;
 
 class DevicesController extends Controller
@@ -14,7 +15,8 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        //
+        return view("device.index",["devices" => Auth::user()->devices()->get()]);
+
     }
 
     /**
@@ -24,7 +26,7 @@ class DevicesController extends Controller
      */
     public function create()
     {
-        dd('dasdasda');
+    
     }
 
     /**
