@@ -29,4 +29,4 @@ Route::resource('device', DevicesController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('user', [UsersController::class, 'index']);
+Route::get('user', [UsersController::class, 'index'])->middleware('auth');

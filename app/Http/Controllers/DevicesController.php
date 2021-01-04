@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Device;
 use Auth;
 use Illuminate\Http\Request;
-
+use App\Services\DeviceByUser;
 class DevicesController extends Controller
 {
+
+    protected $deviceByUserService;
+
+
+    public function __construct(DeviceByUser $deviceByUserService) {
+
+        $this->deviceByUserService = $deviceByUserService ;
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response    
      */
     public function index()
     {
-        return view("device.index",["devices" => Auth::user()->devices()->get()]);
+        $devicesForUser = $this->deviceByUserService->deviceByUser(Auth::user());
+        // dd($devicesForUser);
+        return view("device.index",["devices" => $devicesForUser]);
 
     }
 

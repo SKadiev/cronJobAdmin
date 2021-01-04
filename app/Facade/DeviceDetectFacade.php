@@ -1,14 +1,14 @@
 <?php
 namespace App\Facade;
 use Illuminate\Support\Facades\Facade;
-use App\Helpers\DeviceDetect;
+use App\Services\DeviceDetect;
 
 
 /**
  
  * @method static void resolveOrCreateDevice(string $device_uuid)
  *
- *@see \App\Helpers\DeviceDetect
+ *@see \App\Services\DeviceDetect
 
  */
 

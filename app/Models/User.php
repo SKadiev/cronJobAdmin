@@ -43,8 +43,11 @@ class User extends Authenticatable
     ];
 
     public function devices () {
-
         return $this->hasMany(Device::class);
+    }
+
+    public function roleName () {
+        return $this->hasOne(Role::class, 'id');
     }
 
     public function roleAuthorizationForDomain () {

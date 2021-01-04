@@ -3,11 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\DeviceDetect;
-use  App\Facade\DeviceDetectFacade;
-use App\Models\Device;
+use App\Services\RoleByUser;
 
-class DeviceDetectServiceProvider extends ServiceProvider
+class RoleForUserServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -16,8 +14,8 @@ class DeviceDetectServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind( DeviceDetect::class, function ($app) {
-            return new DeviceDetect;
+        $this->app->bind( RoleByUser::class, function ($app) {
+            return new RoleByUser;
         });
     }
 
