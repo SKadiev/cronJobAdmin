@@ -10,7 +10,7 @@ class DeviceDetect
 
     public function resolveOrCreateDevice ($device_uuid, $user_id) : void {
 
-        $this->deviceDetect($device_uuid);
+        $this->deviceDetect($device_uuid, $user_id);
 
         if (!$this->deviceExist()) {
             
@@ -33,9 +33,12 @@ class DeviceDetect
     }
 
 
-    private function deviceDetect ($device_uuid) {
+    private function deviceDetect ($device_uuid, $user_id) {
 
-        $this->deviceInDb =  Device::where('uuid', $device_uuid)->first();
+        $this->deviceInDb =  Device::where([
+            'uuid' => $device_uuid,
+            'user_id' => $user_id
+        ])->first();
 
     }
 

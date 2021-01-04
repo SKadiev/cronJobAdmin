@@ -25,7 +25,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
       
-
         DeviceDetect::resolveOrCreateDevice('dsaaaaasds',  Auth::user()->id);
 
         return view('home');

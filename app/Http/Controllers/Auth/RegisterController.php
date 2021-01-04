@@ -60,6 +60,7 @@ class RegisterController extends Controller
         ]);
     }
 
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -69,11 +70,18 @@ class RegisterController extends Controller
     protected function create(array $data)
     {   
 
+        $users = User::all();
+        $roles_id;
+        if ($users->isEmpty())
+            $roles_id = 1; 
+        else
+            $roles_id = 2;
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'roles_id' => 1
+            'roles_id' => $roles_id
         ]);
     }
 }
