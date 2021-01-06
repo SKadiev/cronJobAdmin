@@ -21,13 +21,8 @@
                 <td>{{$user->username}}</td>
                 <td>{{$user->roletype}}
                     @if ($userRole === 'admin')
-                    <td>
-                     <form method="POST" action="/user/{{$user->id}}">
-                         @csrf()
-                         @method('DELETE')
-                         <button type="submit" class="btn btn-secondary">Edit</button>
-                     </form>
-                    </td>
+                        <td><a href="/user/{{$user->id}}/edit" class="btn btn-secondary " role="button">Edit Page</a></td>
+
                  @endif
                 <td>
                     <form method="POST" action="/user/{{$user->id}}">

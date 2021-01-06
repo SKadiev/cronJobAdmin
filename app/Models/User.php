@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'id');
     }
 
-    public function roleAuthorizationForDomain () {
+    public function roleAuthorizationForUser () {
 
         $role = $this->hasOne(Role::class, 'id')->first()->name;
         switch ($role) {
@@ -59,6 +59,23 @@ class User extends Authenticatable
 
         }
         
+    }
+
+    public function removeCascade () {
+
+        $this->removePagesCascade();
+        $this->delete();
+    }
+
+    public function removePagesCascade() {
+
+        $reletedDevices = $this->devices()->get();
+        if (count($reletedDevices) > 0) {
+            foreach ($reletedDevices as $device) {
+                $device->delete();
+            }
+
+        }
     }
 
    
