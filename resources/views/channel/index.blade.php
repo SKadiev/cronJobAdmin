@@ -15,6 +15,9 @@
                 <th scope="col">Views</th>
                 <th scope="col">Videos</th>
                 <th scope="col">Score</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+
             </tr>
         </thead>
         <tbody>
@@ -50,5 +53,7 @@
 
         </tbody>
     </table>
+
+    {{$channels->links()}}
 </div>
 @endsection
