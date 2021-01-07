@@ -29,18 +29,18 @@
                 <td>{{$channel->channel_username}}</td>
                 <td>{{$channel->channel_id}}</td>
                 <td>{{$channel->subscribers}}</td>
+                <td>{{$channel->views_count}}</td>
                 <td>{{$channel->video_count}}</td>
-                <td>{{$channel->views_count}}</td>
-                <td>{{$channel->views_count}}</td>
-                <td><a href="/domain/{{$channel->id}}/edit" class="btn btn-secondary " role="button">Edit Channel</a></td>
+                <td>{{$channel->score}}</td>
+                <td><a href="/channel/{{$channel->id}}/edit" class="btn btn-secondary " role="button">Edit Channel</a></td>
                 
                 {{-- @can('delete-domain', $domain) --}}
 
                 <td>
-                    <form method="POST" action="/domain/{{$channel->id}}">
+                    <form method="POST" action="/channel/{{$channel->id}}">
                         @csrf()
                         @method('DELETE')
-                        <button onclick="return confirm('Are you sure? You will lose related pages data')" type="submit" class="btn btn-secondary">Delete</button>
+                        <button onclick="return confirm('Are you sure? You will lose data')" type="submit" class="btn btn-secondary">Delete</button>
 
                     </form>
                 </td>

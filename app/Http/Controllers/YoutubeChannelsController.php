@@ -39,6 +39,40 @@ class YoutubeChannelsController extends Controller
             $channelData
         );
 
-        return redirect('channel');
+        return redirect()->action([YoutubeChannelsController::class, 'index']);
+    }
+
+
+    public function destroy(YoutubeChannel $channel) {
+        
+        $channel->delete();
+        return redirect()->action([YoutubeChannelsController::class, 'index']);
+    }
+
+
+    public function edit(YoutubeChannel $channel)
+    {
+
+        return view('channel.edit', ["channel"=> $channel]);
+    }
+
+   
+    public function update(Request $request, YoutubeChannel $channel)
+    {
+        // dd($request);
+        $channel->update([
+
+            "channel_name" => request("channel_name"),
+            "channel_username" =>request("channel_username"),
+            "channel_id" =>request("channel_id"),
+            "subscribers" =>request("subscribers"),
+            "views_count" =>request("views"),
+            "video_count" =>request("videos"),
+            "score" =>request("score")
+
+        ]);
+
+        return redirect()->action([YoutubeChannelsController::class, 'index']);
+
     }
 }

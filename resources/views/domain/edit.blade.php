@@ -5,7 +5,7 @@
 
     <form method="POST" action="/domain/{{$domain->id}}">
         @csrf()
-        @method('put')
+        @method('PUT')
         <div class="form-group">
             <label for="name">Domain Name</label>
             <input name="name" id="name" class="form-control" type="text" placeholder="Default input" required value="{{$domain->name}}">
