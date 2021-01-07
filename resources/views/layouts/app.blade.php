@@ -35,7 +35,7 @@
                 
                 <a href="/user" class="btn btn-secondary  mr-2 " role="button">Users</a>
 
-                <a href="#" class="btn btn-secondary  mr-2 " role="button">Video Channels</a>
+                <a href="/channel" class="btn btn-secondary  mr-2 " role="button">Video Channels</a>
                 
                 <a href="#" class="btn btn-secondary  mr-2 " role="button">Search Terms</a>
 

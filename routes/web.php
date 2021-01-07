@@ -6,6 +6,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\VideosController;
+use App\Http\Controllers\YoutubeChannelsController;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::resource('domain', DomainsController::class)->middleware('auth');
 Route::resource('page', PagesController::class)->middleware('auth');
 Route::resource('device', DevicesController::class)->middleware('auth');
 Route::resource('user', UsersController::class)->middleware('auth');
+Route::resource('channel', YoutubeChannelsController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/video', [VideosController::class, 'index'])->name('video');

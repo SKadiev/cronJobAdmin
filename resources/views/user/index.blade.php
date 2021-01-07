@@ -21,7 +21,7 @@
                 <td>{{$user->username}}</td>
                 <td>{{$user->roletype}}
                     @if ($userRole === 'admin')
-                        <td><a href="/user/{{$user->id}}/edit" class="btn btn-secondary " role="button">Edit Page</a></td>
+                        <td><a href="/user/{{$user->id}}/edit" class="btn btn-secondary " role="button">Edit User</a></td>
 
                  @endif
                 <td>
