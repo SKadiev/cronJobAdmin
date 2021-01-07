@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DevicesController;
+use App\Http\Controllers\VideosController;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,5 @@ Route::resource('device', DevicesController::class)->middleware('auth');
 Route::resource('user', UsersController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/video', [VideosController::class, 'index'])->name('video');
 

@@ -35,12 +35,13 @@
 
                 <a href="/user" class="btn btn-secondary  mr-2 " role="button">Users</a>
 
-                <a href="/domain" class="btn btn-secondary  mr-2 " role="button">Domains</a>
-
-                <a href="/page" class="btn btn-secondary  mr-2 " role="button">Pages</a>
-
+                <a href="/video" class="btn btn-secondary  mr-2 " role="button">Videos</a>
+            
+                
                 <a href="/device" class="btn btn-secondary  mr-2 " role="button">Devices</a>
-
+                <a href="/domain" class="btn btn-secondary  mr-2 " role="button">Related Domains</a>
+                
+                <a href="/page" class="btn btn-secondary  mr-2 " role="button">Related Page </a>
                 @endif
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
