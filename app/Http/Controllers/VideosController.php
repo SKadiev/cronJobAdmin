@@ -10,6 +10,7 @@ class VideosController extends Controller
     public function index()
     {
 
-        return view("videos.index",["videos" => Video::all()]);
+       
+        return view("videos.index",["videos" => Video::paginate(5)]);
     }
 }

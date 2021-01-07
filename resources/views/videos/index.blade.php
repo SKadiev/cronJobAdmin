@@ -18,7 +18,6 @@
         </thead>
         <tbody>
             @foreach($videos as $key => $video)
-
             <tr>
                 <td>{{$video->title}}</td>
                 <td>{{$video->published_by}}</td>
@@ -29,11 +28,12 @@
                 <td>{{$video->likes}}</td>
                 <td>{{$video->dislikes}}</td>
                 <td>{{$video->favorite}}</td>
-
+                
             </tr>
             @endforeach
-
+            
         </tbody>
     </table>
+    {{$videos->links()}}
 </div>
 @endsection
