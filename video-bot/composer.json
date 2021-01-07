@@ -1,0 +1,10 @@
+{   
+    
+    "autoload": {
+        "classmap": ["./"]
+    },
+    "require": {
+        "google/apiclient": "^2.0",
+        "vlucas/phpdotenv": "^3.5"
+    }
+}
