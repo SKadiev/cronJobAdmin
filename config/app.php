@@ -177,8 +177,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\DeviceDetectServiceProvider::class,
         App\Providers\RoleForUserServiceProvider::class,
-        App\Providers\DeviceByRoleServiceProvider::class
-
+        App\Providers\DeviceByRoleServiceProvider::class,
+        App\Providers\DeviceDetectServiceProvider::class,
+        App\Providers\ChannelsFromCsvServiceProvider::class,
+        
 
     ],
 

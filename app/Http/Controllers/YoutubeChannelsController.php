@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\YoutubeChannel;
-
+use App\Services\ChannelsFromCsv;
 class YoutubeChannelsController extends Controller
 {
     public function index () {
@@ -25,8 +25,7 @@ class YoutubeChannelsController extends Controller
             'channel_name' => 'required|max:255',
             'channel_username' => 'required|max:255',
             'channel_id' => 'required|max:255',
-            
-            ]));
+        ]));
             
         $channelData['subscribers'] = request('subscribers');
         $channelData['views_count'] = request('views');
@@ -75,4 +74,34 @@ class YoutubeChannelsController extends Controller
         return redirect()->action([YoutubeChannelsController::class, 'index']);
 
     }
+
+
+    public function importChannels (ChannelsFromCsv $channelService) {
+
+        // dd($channelService);
+        if ($f_pointer = fopen($_FILES['csv_data']['tmp_name'], 'r')) {
+            $temp = [];
+            
+            while (! feof($f_pointer)) {
+                $payload = fgetcsv($f_pointer);
+                
+                if( is_array($payload) ) {
+                    array_push($temp,$payload[0]);
+                }
+                
+            }
+            $channelService->parseChannels($temp);
+            var_dump($temp);
+                die();
+                $list = $channelService->filter_insert_channel_list($temp);
+                // $this->insert_channels_from_list($list);
+            
+            }
+            fclose($f_pointer);
+    
+
+
+    } 
+
+    
 }

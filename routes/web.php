@@ -30,6 +30,7 @@ Route::resource('domain', DomainsController::class)->middleware('auth');
 Route::resource('page', PagesController::class)->middleware('auth');
 Route::resource('device', DevicesController::class)->middleware('auth');
 Route::resource('user', UsersController::class)->middleware('auth');
+Route::post('channel/importChannels', [YoutubeChannelsController::class, 'importChannels'])->name('channel');
 Route::resource('channel', YoutubeChannelsController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

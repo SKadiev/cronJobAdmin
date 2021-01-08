@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/device-uuid.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/spin.js') }}" defer></script>
 
 
 

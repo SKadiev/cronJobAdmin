@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "device-uuid": "^1.0.4"
+        "device-uuid": "^1.0.4",
+        "spin.js": "^4.1.0"
     }
 }

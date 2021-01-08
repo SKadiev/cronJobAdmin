@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'youtube' => [
+        'key' => 'AIzaSyD0-Zl85OMQNN9KsthX_7ez9EFJRF6-1eQ'
+    ],
+
 ];
