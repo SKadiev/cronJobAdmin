@@ -44,6 +44,7 @@ $('#cmsInput').on('change', function (e) {
         },
         success: function (php_script_response) {
             $("input").prop('disabled', false);
+            window.location.href = "/channel";
         },
         complete: function () {
             spinner.stop();

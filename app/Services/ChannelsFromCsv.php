@@ -48,10 +48,13 @@ class ChannelsFromCsv
     }
 
 
-    private function  insert_channels_from_list ($list) {
+    private function  insert_channels_from_list ($fulllist) {
         $inserted_records = [];
         
-            foreach($list as $i => $channel_name) {
+        foreach ($fulllist as $i => $items) {
+
+            foreach($items as $i => $channel_name) {
+                // dd($channel_name, $i);
                 
                 if ($i === 'username') {
                     $item = $this->fetch_user_upload_list_stats_and_id($channel_name['channel']);
@@ -64,6 +67,7 @@ class ChannelsFromCsv
                         'channel_id' => null
                     ];
                     $channel_id = $this->fetch_id_if_channel_is_inserted('username', $channel_name);
+                    dd($channel_id);
                     if (!empty($channel_id)) {
                         
                         if ($this->update_video_channel($data, $channel_id)) {
@@ -77,7 +81,7 @@ class ChannelsFromCsv
 
                 } else {
 
-                    $item = $this->fetch_user_upload_list_stats_and_id($channel_name['channel'], 'channel_id');
+                    $item = $this->fetch_user_upload_list_stats_and_id($channel_name, $i);
                     $data = [
                         'views_count' => $item->statistics->viewCount,
                         'subscribers' => $item->statistics->subscriberCount,
@@ -90,7 +94,7 @@ class ChannelsFromCsv
                     if (!empty($channel_id)) {
                         
                         if ($this->update_video_channel($data, $channel_id)) {
-                            log_to_file('updateChannel',$this->log_type,$this->handle);
+                            // log_to_file('updateChannel',$this->log_type,$this->handle);
                             continue;
                         };
 
@@ -100,14 +104,20 @@ class ChannelsFromCsv
                     };
                 }
             }
+        }
         
         $max_score = $this->channel_stats_sum();
         foreach ($inserted_records as $index => $record) {
             $this->calculate_relevance_score($record,$max_score);
         }
+
+        return $inserted_records;
     }
 
     private function fetch_user_upload_list_stats_and_id(string $channel_name, $request_by_type = 'username') {
+        $request_data;
+
+        // dd($request_by_type);
         if ($request_by_type === 'username') {
 
             $request_data = [
@@ -116,7 +126,7 @@ class ChannelsFromCsv
                 'key' => $this->youtube_key
             ];
 
-        } elseif ($request_by_type === 'channel_id') {
+        } elseif ($request_by_type === 'channel') {
 
             $request_data = [
                 'part' => 'statistics,snippet', 
@@ -195,10 +205,9 @@ class ChannelsFromCsv
     
     private function insert_video_channel($insertValues) {
     
-
-        YoutubeChannel::create([
+        YoutubeChannel::create(
             $insertValues
-        ]);
+        );
 
         return true;
        

@@ -90,12 +90,9 @@ class YoutubeChannelsController extends Controller
                 }
                 
             }
-            $channelService->parseChannels($temp);
-            var_dump($temp);
-                die();
-                $list = $channelService->filter_insert_channel_list($temp);
-                // $this->insert_channels_from_list($list);
-            
+            $list = $channelService->parseChannels($temp);
+
+
             }
             fclose($f_pointer);
     

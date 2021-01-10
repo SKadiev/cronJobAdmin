@@ -15,9 +15,9 @@ class CreateYoutubeChannelsTable extends Migration
     {
         Schema::create('youtube_channels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('channel_name');
-            $table->string('channel_username');
-            $table->string('channel_id');
+            $table->string('channel_name')->nullable();
+            $table->string('channel_username')->nullable();
+            $table->string('channel_id')->nullable();
             $table->bigInteger('subscribers')->nullable();
             $table->bigInteger('views_count')->nullable();
             $table->bigInteger('video_count')->nullable();
