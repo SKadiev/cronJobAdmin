@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\YoutubeChannelsController;
+use App\Http\Controllers\RulesController;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::resource('device', DevicesController::class)->middleware('auth');
 Route::resource('user', UsersController::class)->middleware('auth');
 Route::post('channel/importChannels', [YoutubeChannelsController::class, 'importChannels'])->name('channel');
 Route::resource('channel', YoutubeChannelsController::class)->middleware('auth');
+Route::resource('rule', RulesController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/video', [VideosController::class, 'index'])->name('video');

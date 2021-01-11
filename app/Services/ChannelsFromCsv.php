@@ -6,8 +6,6 @@ class ChannelsFromCsv
 
 {
     private $youtube_key;
-
-
     protected $resources = array(
         'videos.list' => 'https://www.googleapis.com/youtube/v3/videos',
         'search.list' => 'https://www.googleapis.com/youtube/v3/search',
@@ -54,7 +52,6 @@ class ChannelsFromCsv
         foreach ($fulllist as $i => $items) {
 
             foreach($items as $i => $channel_name) {
-                // dd($channel_name, $i);
                 
                 if ($i === 'username') {
                     $item = $this->fetch_user_upload_list_stats_and_id($channel_name['channel']);
@@ -94,7 +91,6 @@ class ChannelsFromCsv
                     if (!empty($channel_id)) {
                         
                         if ($this->update_video_channel($data, $channel_id)) {
-                            // log_to_file('updateChannel',$this->log_type,$this->handle);
                             continue;
                         };
 
@@ -117,7 +113,6 @@ class ChannelsFromCsv
     private function fetch_user_upload_list_stats_and_id(string $channel_name, $request_by_type = 'username') {
         $request_data;
 
-        // dd($request_by_type);
         if ($request_by_type === 'username') {
 
             $request_data = [
