@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\YoutubeChannel;
 use App\Services\ChannelsFromCsv;
@@ -17,26 +17,19 @@ class YoutubeChannelsController extends Controller
         return view("channel.create");
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ChannelsFromCsv $channelService)
     {
 
         
         $channelData = ($request->validate([
-            'channel_name' => 'required|max:255',
-            'channel_username' => 'required|max:255',
-            'channel_id' => 'required|max:255',
+            'channel_url' => 'max:255',
         ]));
-            
-        $channelData['subscribers'] = request('subscribers');
-        $channelData['views_count'] = request('views');
-        $channelData['video_count'] = request('videos');
-        $channelData['score'] = request('score');
 
-
-
-        YoutubeChannel::create(
-            $channelData
+        
+        $channelData = Arr::collapse(
+            $channelService->parseChannels([$channelData['channel_url']])
         );
+       
 
         return redirect()->action([YoutubeChannelsController::class, 'index']);
     }
@@ -58,7 +51,6 @@ class YoutubeChannelsController extends Controller
    
     public function update(Request $request, YoutubeChannel $channel)
     {
-        // dd($request);
         $channel->update([
 
             "channel_name" => request("channel_name"),
@@ -78,7 +70,6 @@ class YoutubeChannelsController extends Controller
 
     public function importChannels (ChannelsFromCsv $channelService) {
 
-        // dd($channelService);
         if ($f_pointer = fopen($_FILES['csv_data']['tmp_name'], 'r')) {
             $temp = [];
             
@@ -90,13 +81,11 @@ class YoutubeChannelsController extends Controller
                 }
                 
             }
+            
             $list = $channelService->parseChannels($temp);
-
 
             }
             fclose($f_pointer);
-    
-
 
     } 
 

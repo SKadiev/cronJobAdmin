@@ -8,7 +8,7 @@ $('#cmsInput').on('change', function (e) {
         radius: 22,
         scale: 1,
         corners: 1,
-        color: '#007aff',
+        color: '#454d55',
         opacity: 0.25,
         rotate: 0,
         direction: 1,

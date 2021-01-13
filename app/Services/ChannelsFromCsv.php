@@ -21,7 +21,7 @@ class ChannelsFromCsv
 
     public function parseChannels ($temp) {
         $alist = $this->filter_insert_channel_list($temp);
-        $this->insert_channels_from_list($alist);
+        return  $this->insert_channels_from_list($alist);
     }
     
     private function extract_string_after_occurrence($string, $search){
@@ -47,6 +47,7 @@ class ChannelsFromCsv
 
 
     private function  insert_channels_from_list ($fulllist) {
+        YoutubeChannel::truncate();
         $inserted_records = [];
         
         foreach ($fulllist as $i => $items) {
@@ -111,6 +112,8 @@ class ChannelsFromCsv
 
         return $inserted_records;
     }
+
+    
 
     private function fetch_user_upload_list_stats_and_id(string $channel_name, $request_by_type = 'username') {
         $request_data;
@@ -229,7 +232,15 @@ class ChannelsFromCsv
         if (!$channels->isEmpty()) {
             foreach ($channels as $index => $data) {
                 
-                $score =  (round(($data['views_count'] ?? 0) / ($data['video_count'] ?? 0)) ?? 0) + ($data['subscribers'] ?? 0 ) ;
+
+                if ($data['views_count'] === 0  || $data['video_count'] === 0 ) {
+                    
+                    $score =  ($data['subscribers'] ?? 0 ) ;
+                } else {
+                    $score =  (round(($data['views_count'] ?? 0) / ($data['video_count'] ?? 0)) ?? 0) + ($data['subscribers'] ?? 0 ) ;
+
+                }
+
                 if (is_nan($score)) {
                     continue;
                 }
@@ -247,8 +258,15 @@ class ChannelsFromCsv
 
     private function  calculate_relevance_score ($insertValues, $maxScore) {
 
-           
-        $score =  (round(($insertValues['views_count'] ?? 0) / ($insertValues['video_count'] ?? 0)) ?? 0) + ($insertValues['subscribers'] ?? 0 ) ;
+        $score;   
+        
+        if ($insertValues['views_count'] == 0  || $insertValues['video_count'] == 0 ) {
+                    
+            $score =  ($insertValues['subscribers'] ?? 0 ) ;
+        } else {
+            $score =  (round(($insertValues['views_count'] ?? 0) / ($insertValues['video_count'] ?? 0)) ?? 0) + ($insertValues['subscribers'] ?? 0 ) ;
+
+        }
         if (is_nan($score)) {
             $score = 0;
         }
