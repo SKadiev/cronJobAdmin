@@ -103,7 +103,9 @@ class ChannelsFromCsv
         }
         
         $max_score = $this->channel_stats_sum();
+    
         foreach ($inserted_records as $index => $record) {
+           
             $this->calculate_relevance_score($record,$max_score);
         }
 
@@ -186,8 +188,8 @@ class ChannelsFromCsv
         $channel->update([
             
             "subscribers" => request("name"),
-            "views_count" =>request("score"),
-            "views_count" =>request("score")
+            "views_count" =>request("views_count"),
+            "views_count" =>request("views_count")
 
         ]);
         
@@ -224,16 +226,17 @@ class ChannelsFromCsv
        $temp_score_table = [];
        $channels =  YoutubeChannel::orderBy('subscribers', 'DESC')->get();
 
-        if (count($channels) > 0  && !empty($res)) {
-
+        if (!$channels->isEmpty()) {
             foreach ($channels as $index => $data) {
-
+                
                 $score =  (round(($data['views_count'] ?? 0) / ($data['video_count'] ?? 0)) ?? 0) + ($data['subscribers'] ?? 0 ) ;
                 if (is_nan($score)) {
                     continue;
                 }
                 array_push($temp_score_table, $score);
             }
+
+
             return max($temp_score_table);
         } else {
             return false;
@@ -245,12 +248,12 @@ class ChannelsFromCsv
     private function  calculate_relevance_score ($insertValues, $maxScore) {
 
            
-        $score =  (round(($insertValues['views_count']) / ($insertValues['video_count'] ))) ;
+        $score =  (round(($insertValues['views_count'] ?? 0) / ($insertValues['video_count'] ?? 0)) ?? 0) + ($insertValues['subscribers'] ?? 0 ) ;
         if (is_nan($score)) {
             $score = 0;
         }
-        if (!empty($maxScore )) {
-
+        if (!empty($maxScore)) {
+            
             $newScore = round(( $score / $maxScore) * 100);
             if (is_nan($newScore)){
                 return;
@@ -261,10 +264,11 @@ class ChannelsFromCsv
         
         
         if (is_null($insertValues['channel_id']) && !empty($insertValues['channel_username'])) {
-
+           
             YoutubeChannel::where(['channel_username' => $insertValues['channel_username'] ])->first()->update(["score" => $newScore]);
 
         } else {
+          
             YoutubeChannel::where(['channel_id' => $insertValues['channel_id'] ])->first()->update(["score" => $newScore]);
        
         }

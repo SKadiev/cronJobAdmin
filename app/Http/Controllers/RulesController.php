@@ -57,8 +57,6 @@ class RulesController extends Controller
     public function update(Request $request, Rule $rule)
     {
           
-
-
         $rule->update([
             "name" => request("name"),
             "from" => request("from"),
