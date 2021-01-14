@@ -20,17 +20,12 @@ class YoutubeChannelsController extends Controller
     public function store(Request $request, ChannelsFromCsv $channelService)
     {
 
-        
         $channelData = ($request->validate([
             'channel_url' => 'max:255',
         ]));
 
+        $channels = $channelService->parseChannel([$channelData['channel_url']]);
         
-        $channelData = Arr::collapse(
-            $channelService->parseChannels([$channelData['channel_url']])
-        );
-       
-
         return redirect()->action([YoutubeChannelsController::class, 'index']);
     }
 

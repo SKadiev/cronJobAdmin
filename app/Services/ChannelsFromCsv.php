@@ -13,6 +13,8 @@ class ChannelsFromCsv
         'playlists.list' => 'https://www.googleapis.com/youtube/v3/playlists',
         'playlistItems.list' => 'https://www.googleapis.com/youtube/v3/playlistItems',
         'activities' => 'https://www.googleapis.com/youtube/v3/activities',
+        'channelUrlPath' => 'https://www.youtube.com/channel/'
+        
     );
 
     public function __construct ($youtube_api_key) {
@@ -20,8 +22,13 @@ class ChannelsFromCsv
     }
 
     public function parseChannels ($temp) {
-        $alist = $this->filter_insert_channel_list($temp);
-        return  $this->insert_channels_from_list($alist);
+        $list = $this->filter_insert_channel_list($temp);
+        return  $this->insert_channels_from_list($list);
+    }
+
+    public function parseChannel ($tempData) {
+        $list = $this->filter_insert_channel_list($tempData);
+        return  $this->insert_channel($list);
     }
     
     private function extract_string_after_occurrence($string, $search){
@@ -46,6 +53,74 @@ class ChannelsFromCsv
     }
 
 
+    private function  insert_channel($fulllist) {
+        $inserted_records = [];
+        
+        foreach ($fulllist as $i => $items) {
+
+            foreach($items as $i => $channel_name) {
+                
+                if ($i === 'username') {
+                    $item = $this->fetch_user_upload_list_stats_and_id($channel_name['channel']);
+                    $data = [
+                        'views_count' => $item->statistics->viewCount,
+                        'subscribers' => $item->statistics->subscriberCount,
+                        'video_count' => $item->statistics->videoCount,
+                        'channel_username' => $channel_name,
+                        'channel_name' => null,
+                        'channel_id' => null
+                    ];
+                    $channel_id = $this->fetch_id_if_channel_is_inserted('username', $channel_name);
+                    dd($channel_id);
+                    if (!empty($channel_id)) {
+                        
+                        if ($this->update_video_channel($data, $channel_id)) {
+                            continue;
+                        };
+
+                    } 
+                    if ($this->insert_video_channel($data)) {
+                        array_push($inserted_records,$data);
+                    };
+
+                } else {
+
+                    $item = $this->fetch_user_upload_list_stats_and_id($channel_name, $i);
+                    $data = [
+                        'views_count' => $item->statistics->viewCount,
+                        'subscribers' => $item->statistics->subscriberCount,
+                        'video_count' => $item->statistics->videoCount,
+                        'channel_username' => null,
+                        'channel_name' => $item->snippet->title,
+                        'channel_id' => $item->id
+                    ];
+                    $channel_id = $this->fetch_id_if_channel_is_inserted('channel_id', $item->id);
+                    if (!empty($channel_id)) {
+                        
+                        if ($this->update_video_channel($data, $channel_id)) {
+                            continue;
+                        };
+
+                    } 
+                    if ($this->insert_video_channel($data)) {
+                        array_push($inserted_records,$data);
+                    };
+                }
+            }
+        }
+        
+        $max_score = $this->channel_stats_sum();
+    
+        foreach ($inserted_records as $index => $record) {
+           
+            $this->calculate_relevance_score($record,$max_score);
+        }
+
+        return $inserted_records;
+    }
+
+
+
     private function  insert_channels_from_list ($fulllist) {
         YoutubeChannel::truncate();
         $inserted_records = [];
@@ -65,7 +140,6 @@ class ChannelsFromCsv
                         'channel_id' => null
                     ];
                     $channel_id = $this->fetch_id_if_channel_is_inserted('username', $channel_name);
-                    dd($channel_id);
                     if (!empty($channel_id)) {
                         
                         if ($this->update_video_channel($data, $channel_id)) {
@@ -291,6 +365,22 @@ class ChannelsFromCsv
        
         }
      
+    }
+
+    public function composeChannelUrls ($channelList) {
+
+        $temp = [];
+
+        foreach ($channelList as $channel) {
+
+            if ($channel->channel_username) 
+                array_push($temp,  $this->resources['channelUrlPath'] . $channel->channel_username);
+            elseif ($channel->channel_name) 
+                array_push($temp, $this->resources['channelUrlPath'] . $channel->channel_name);
+
+        }
+
+        return $temp;
     }
 
 }
