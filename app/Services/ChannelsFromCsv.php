@@ -71,7 +71,6 @@ class ChannelsFromCsv
                         'channel_id' => null
                     ];
                     $channel_id = $this->fetch_id_if_channel_is_inserted('username', $channel_name);
-                    dd($channel_id);
                     if (!empty($channel_id)) {
                         
                         if ($this->update_video_channel($data, $channel_id)) {

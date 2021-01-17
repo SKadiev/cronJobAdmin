@@ -11,6 +11,15 @@ class Domain extends Model
 
     protected $guarded = [];
     
+    public function domainName () {
+        return $this->name;
+    }
+
+    public function domainScore () {
+        return $this->score;
+    }
+
+
     public function pages() {
        return  $this->hasMany(Page::class);
     }
