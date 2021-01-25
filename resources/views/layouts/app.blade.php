@@ -40,6 +40,8 @@
                 
                 <a href="/rule" class="btn btn-secondary  mr-2 " role="button">Rules</a>
 
+                <a href="/job" class="btn btn-secondary  mr-2 " role="button">Jobs</a>
+
                 <a href="#" class="btn btn-secondary  mr-2 " role="button">Terms</a>
 
                 <a href="/video" class="btn btn-secondary  mr-2 " role="button">Videos</a>

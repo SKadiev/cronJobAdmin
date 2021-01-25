@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use DeviceDetect;
+use Illuminate\Support\Facades\Redis;
 class HomeController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-      
+     
         DeviceDetect::resolveOrCreateDevice('dsaaaaasds',  Auth::user()->id);
 
         return view('home');
