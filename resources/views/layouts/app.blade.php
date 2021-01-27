@@ -34,23 +34,23 @@
 
                 @if(Auth::user())
                 
-                <a href="/user" class="btn btn-secondary  mr-2 " role="button">Users</a>
+                <a href="{{route('user.index')}}" class="btn btn-secondary  mr-2 " role="button">Users</a>
 
-                <a href="/channel" class="btn btn-secondary  mr-2 " role="button">Channels</a>
+                <a href="{{route('channel.index')}}" class="btn btn-secondary  mr-2 " role="button">Channels</a>
                 
-                <a href="/rule" class="btn btn-secondary  mr-2 " role="button">Rules</a>
+                <a href="{{route('rule.index')}}" class="btn btn-secondary  mr-2 " role="button">Rules</a>
 
-                <a href="/job" class="btn btn-secondary  mr-2 " role="button">Jobs</a>
+                <a href="{{route('job.index')}}" class="btn btn-secondary  mr-2 " role="button">Jobs</a>
 
                 <a href="#" class="btn btn-secondary  mr-2 " role="button">Terms</a>
 
-                <a href="/video" class="btn btn-secondary  mr-2 " role="button">Videos</a>
+                <a href="{{route('video')}}" class="btn btn-secondary  mr-2 " role="button">Videos</a>
             
                 
-                <a href="/device" class="btn btn-secondary  mr-2 " role="button">Devices</a>
-                <a href="/domain" class="btn btn-secondary  mr-2 " role="button">Domains</a>
+                <a href="{{route('device.index')}}" class="btn btn-secondary  mr-2 " role="button">Devices</a>
+                <a href="{{route('domain.index')}}" class="btn btn-secondary  mr-2 " role="button">Domains</a>
                 
-                <a href="/page" class="btn btn-secondary  mr-2 " role="button">Pages </a>
+                <a href='{{route('page.index')}}' class="btn btn-secondary  mr-2 " role="button">Pages </a>
                 @endif
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

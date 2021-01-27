@@ -16,6 +16,7 @@ class PagesController extends Controller
      */
     public function index()
     {
+
         $pages = DB::table('pages')
             ->leftJoin('domains', 'pages.domain_id', '=', 'domains.id')
             ->select('pages.id', 'domains.name', 'pages.body')

@@ -108,7 +108,7 @@ USE PDO;
         }
 
         public function getCrawlingRange($youtube_channel_rule_from, $youtube_channel_rule_to) {
-            $statement = $this->pdo_pgsql->prepare("SELECT * FROM youtube_channel WHERE score BETWEEN ? AND ? ");
+            $statement = $this->pdo_pgsql->prepare("SELECT * FROM youtube_channels WHERE score BETWEEN ? AND ? ");
             $statement->execute([$youtube_channel_rule_from, $youtube_channel_rule_to]);
         
             if ($statement->rowCount() > 0 ) {

@@ -863,7 +863,6 @@ class YouTubeApiFacade
             }
         }
 
-        var_dump($all_links);
 
         foreach ($all_links as $link_index => $link) {
             if (!$db->is_video_inserted($link['video_id'])) {
@@ -875,7 +874,7 @@ class YouTubeApiFacade
                 $video_data['dislikes'] = (int)$link['dislikes'];
                 $video_data['favorite'] = (int)$link['favorite'];
                 $db->insert_video_in_table($link, $this->handle);
-                log_url_to_file($this->log_type, $link['url'],$link['title'],$this->handle);
+                // log_url_to_file($this->log_type, $link['url'],$link['title'],$this->handle);
 
             } else {
                 if ($this->get_reindex_value() == 1) {
@@ -927,7 +926,7 @@ class YouTubeApiFacade
                         $video_data['favorite'] = (int)$video_stats->statistics->favoriteCount ?? null;
                         $db->insert_video_in_table($video_data, $this->handle);
 
-                        log_url_to_file($this->log_type, $video_data['url'],$video_data['title'],$this->handle);
+                        // log_url_to_file($this->log_type, $video_data['url'],$video_data['title'],$this->handle);
  
                     } else {
                         if ($this->get_reindex_value() == 1) {
@@ -963,7 +962,7 @@ class YouTubeApiFacade
                             $video_data['dislikes'] = (int)$video_stats->statistics->dislikeCount ?? null ;
                             $video_data['favorite'] = (int)$video_stats->statistics->favoriteCount ?? null;
                             $db->insert_video_in_table($video_data, $this->handle);
-                            log_url_to_file($this->log_type,$video_data['url'],$video_data['title'],$this->handle);
+                            // log_url_to_file($this->log_type,$video_data['url'],$video_data['title'],$this->handle);
 
                         } else {
                             if ($this->get_reindex_value() == 1) {

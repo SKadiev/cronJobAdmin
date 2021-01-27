@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
-class SomeJob implements ShouldQueue
+class CrawlerJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,11 +21,10 @@ class SomeJob implements ShouldQueue
      *
      * @return void
      */
-
-    protected $user;
-
-    private const CRAWLER_URL_PATH = 'http://localhost:9999/spider.php?feed=1&';
     
+    private const CRAWLER_URL_PATH = 'http://localhost:9999/spider.php?all=1&';
+    
+    protected $user;
 
     protected $searchRule;
 
@@ -34,11 +33,14 @@ class SomeJob implements ShouldQueue
     protected $to;
 
 
+
+    
     public function __construct(User $user, $from, $to)
     {
         $this->user = $user;
         $this->from = $from;
         $this->to = $to;
+
     }
 
     /**
@@ -48,16 +50,11 @@ class SomeJob implements ShouldQueue
      */
     public function handle()
     {
+    
 
-        $response = Http::get(SomeJob::CRAWLER_URL_PATH . "rule={$this->from}-{$this->to}");
-        // sleep(10);
-        // Log::info('Job completed');
-
-        // http://localhost:9999/spider.php?search=1&phrase=bitola%20fudbal&iterations=1
-        // $response = Http::get('http://localhost:9999/spider.php?search=1&phrase=messi&iterations=1');
-
-        // sleep(2);
-        // Log::info('Job completed with user id :' . $this->user->id);
-
+        
+        $response = Http::get($this->CRAWLER_URL_PATH . "rule={$this->from}-{$this->to}");
+        sleep(2);
+        Log::info('Job completed');
     }
 }

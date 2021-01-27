@@ -11,9 +11,10 @@
                 <th scope="col">Number of videos to crawl</th>
                 <th scope="col">Videos from score</th>
                 <th scope="col">Videos from to</th>
-
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
+                <th scope="col">Run job</th>
+
             </tr>
         </thead>
         <tbody>
@@ -38,10 +39,30 @@
                     </form>
                 </td>
 
+                <td>
+                    <form id="jobForm" method="GET" action="job/{{$job->from}}/{{$job->to}}">
+                        @csrf()
+                        <button type="submit" class="btn btn-secondary">Run job</button>
+
+                    </form>
+                </td>
+                
+
             </tr>
             @endforeach
 
         </tbody>
     </table>
 </div>
+<script>
+
+    let form = document.getElementById('jobForm');
+
+    form.addEventListener('submit', function(e) {
+
+        // e.preventDefault();
+        
+
+    });
+</script>
 @endsection

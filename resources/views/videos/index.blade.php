@@ -14,6 +14,8 @@
                 <th scope="col">Likes</th>
                 <th scope="col">Dislikes</th>
                 <th scope="col">Favorite</th>
+                <th scope="col">Delete</th>
+
             </tr>
         </thead>
         <tbody>
@@ -28,7 +30,14 @@
                 <td>{{$video->likes}}</td>
                 <td>{{$video->dislikes}}</td>
                 <td>{{$video->favorite}}</td>
-                
+                <td>
+                    <form method="POST" action="/video/{{$video->id}}">
+                        @csrf()
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-secondary">Delete</button>
+
+                    </form>
+                </td>
             </tr>
             @endforeach
             

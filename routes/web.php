@@ -13,7 +13,7 @@ use App\Http\Controllers\JobsController;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use App\Jobs\SomeJob;
+use App\Jobs\CrawlerJob;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,15 +40,13 @@ Route::resource('rule', RulesController::class)->middleware('auth');
 Route::resource('job', JobsController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/video', [VideosController::class, 'index'])->name('video');
+Route::get('video', [VideosController::class, 'index'])->name('video');
+Route::delete('video/{video}', [VideosController::class, 'destroy'])->name('video.destroy');
 
-Route::get('jobs/{jobsNumber}/{user}', function ($jobsNumber, $user) {
-    
-    $user = User::find($user);
+Route::get('job/{from}/{to}', function ($from, $to, $type) {
 
-    for ($i=0; $i < $jobsNumber ; $i++) { 
-        
-        SomeJob::dispatch($user);
-    }
+    CrawlerJob::dispatch(Auth::user(), $from, $to);
 
 });
+
+
