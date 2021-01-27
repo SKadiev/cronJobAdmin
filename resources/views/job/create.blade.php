@@ -6,13 +6,19 @@
     <form method="POST" action="/job">
         @csrf()
         @method('post')
+
+        <select class="form-control mb-2" name="job_type_id" required>
+            <option selected>Select JobType</option>
+            @foreach ($jobTypes as $key => $job)
+            <option value="{{ $job }}">
+                {{ $key }}
+            </option>
+            @endforeach
+        </select>
         
-        @error('url')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        
+   
         <select class="form-control mb-2" name="rules_id" required>
-            <option selected>Select Domain</option>
+            <option selected>Select Rule</option>
             @foreach ($rules as $key => $rule)
             <option value="{{ $rule }}">
                 {{ $key }}

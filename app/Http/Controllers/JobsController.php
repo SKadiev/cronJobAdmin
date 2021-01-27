@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\Rule;
+use App\Models\JobType;
 
 use DB;
 class JobsController extends Controller
@@ -19,12 +20,15 @@ class JobsController extends Controller
 
         $jobs = DB::table('jobs')
         ->leftJoin('rules', 'jobs.rules_id', '=', 'rules.id')
+        ->leftJoin('job_types', 'jobs.job_type_id', '=', 'job_types.id')
         ->select(
             'jobs.id',
             'rules.name',
             'jobs.videos_to_crawl',
             'rules.from',
-            'rules.to')    
+            'rules.to',
+            'job_types.type'
+            )    
         ->get();
         
         return view("job.index",["jobs" => $jobs]);
@@ -40,7 +44,9 @@ class JobsController extends Controller
     {
         $rules = Rule::pluck('id', 'name');
       
-        return view('job.create', (compact('rules')));
+        $jobTypes = JobType::pluck('id', 'type');
+
+        return view('job.create', (compact('rules', 'jobTypes')));
     }
 
     /**
@@ -55,7 +61,8 @@ class JobsController extends Controller
           
             $request->validate([
                 'videos_to_crawl' => 'required',
-                'rules_id' => 'required'
+                'rules_id' => 'required',
+                'job_type_id' => 'required'
 
             ])
         );

@@ -17,7 +17,9 @@ class CreateJobsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('videos_to_crawl')->unsigned();
             $table->unsignedBigInteger('rules_id');
+            $table->unsignedBigInteger('job_type_id');
             $table->foreign('rules_id')->references('id')->on('rules');
+            $table->foreign('job_type_id')->references('id')->on('job_types');
         });
     }
 

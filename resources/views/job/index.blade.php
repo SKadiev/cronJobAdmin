@@ -11,6 +11,7 @@
                 <th scope="col">Number of videos to crawl</th>
                 <th scope="col">Videos from score</th>
                 <th scope="col">Videos from to</th>
+                <th scope="col">Type</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
                 <th scope="col">Run job</th>
@@ -28,6 +29,7 @@
                 <td>{{($job->videos_to_crawl)}} </td>
                 <td>{{($job->from)}} </td>
                 <td>{{($job->to)}} </td>
+                <td>{{($job->type)}} </td>
 
                 <td><a href="/job/{{$job->id}}/edit" class="btn btn-secondary " role="button">Edit Job</a></td>
                 <td>
