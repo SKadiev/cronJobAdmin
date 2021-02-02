@@ -26,12 +26,11 @@
 
             <tr>
                 <td>{{$job->name}}</td>
-                <td>{{($job->videos_to_crawl)}} </td>
-                <td>{{($job->from)}} </td>
-                <td>{{($job->to)}} </td>
-                <td>{{($job->type)}} </td>
-
-                <td><a href="/job/{{$job->id}}/edit" class="btn btn-secondary " role="button">Edit Job</a></td>
+                <td class="videosToCrawl">{{($job->videos_to_crawl)}} </td>
+                <td class="jobsFrom">{{($job->from)}} </td>
+                <td class="jobsTo">{{($job->to)}} </td>
+                <td class="jobsType">{{($job->type)}} </td>
+                <td><a href="/job/{{$job->id}}/edit" class="btn btn-secondary" role="button">Edit Job</a></td>
                 <td>
                     <form method="POST" action="/job/{{$job->id}}">
                         @csrf()
@@ -42,11 +41,8 @@
                 </td>
 
                 <td>
-                    <form id="jobForm" method="GET" action="job/{{$job->from}}/{{$job->to}}">
-                        @csrf()
-                        <button type="submit" class="btn btn-secondary">Run job</button>
-
-                    </form>
+                    {{-- <form id="jobForm" method="GET" action="job/{{$job->from}}/{{$job->to}}/{{$job->type}}"> --}}
+                    <button class="btn btn-secondary runJobBtn">Run job</button>
                 </td>
                 
 
@@ -56,15 +52,31 @@
         </tbody>
     </table>
 </div>
+@section('footerScripts')
+@parent
+
 <script>
+    
+    let runJobBtn = document.querySelectorAll('.runJobBtn');
 
-    let form = document.getElementById('jobForm');
+    runJobBtn.forEach(job => job.addEventListener('click', function() {
+        let tableRow = $(this).parent().parent(); 
+        // console.log(tableRow, this);
+        let videosToCrawl = tableRow.find('.videosToCrawl').text();
+        let jobsFrom = tableRow.find('.jobsFrom').text();
+        let jobsTo = tableRow.find('.jobsTo').text();
+        let jobsType = tableRow.find('.jobsType').text();
+        // console.log(jobsFrom);
+        $.ajax({
+            type:'GET',
+            url:`job/${jobsFrom}/${jobsTo}/${jobsType}`,
+            success:function(data){
+                alert(data);
+            }
+        });
+    }));
 
-    form.addEventListener('submit', function(e) {
-
-        // e.preventDefault();
-        
-
-    });
+   
 </script>
+@endsection
 @endsection

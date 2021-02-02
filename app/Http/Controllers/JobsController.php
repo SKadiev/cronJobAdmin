@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\Rule;
+use App\Models\Domain;
 use App\Models\JobType;
 
 use DB;
@@ -87,11 +88,17 @@ class JobsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Job $job)
     {
-        $domains = Domain::pluck('name', 'id');
+        // $domains = Domain::pluck('name', 'id');
+        $rules = Rule::pluck('name', 'id');
+      
+        $jobTypes = JobType::pluck('type', 'id');
+        
+        // dd($rules, $jobTypes);
 
-        return view('page.edit', (compact('page', 'domains')));
+
+        return view('job.edit', (compact( 'rules', 'jobTypes', 'job')));
     }
 
     /**
@@ -101,15 +108,16 @@ class JobsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Job $job)
     {
-        $page->update([
-            "body" => request("body"),
-            "domain_id" => request("domain_id")
+        $job->update([
+            'job_type_id' => request('job_type_id'),
+            'rules_id' => request('rules_id'),
+            "videos_to_crawl" => request('videos_to_crawl')
 
         ]);
 
-        return redirect()->action([PagesController::class, 'index']);
+        return redirect()->action([JobsController::class, 'index']);
     }
 
     /**

@@ -43,9 +43,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('video', [VideosController::class, 'index'])->name('video');
 Route::delete('video/{video}', [VideosController::class, 'destroy'])->name('video.destroy');
 
-Route::get('job/{from}/{to}', function ($from, $to, $type) {
+Route::get('job/{from}/{to}/{type}', function ($from, $to, $type) {
 
-    CrawlerJob::dispatch(Auth::user(), $from, $to);
+    CrawlerJob::dispatch(Auth::user(), $from, $to, $type);
 
 });
 

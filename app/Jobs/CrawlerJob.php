@@ -22,7 +22,7 @@ class CrawlerJob implements ShouldQueue
      * @return void
      */
     
-    private const CRAWLER_URL_PATH = 'http://localhost:9999/spider.php?all=1&';
+    private const CRAWLER_URL_PATH = 'http://localhost:9999/spider.php?';
     
     protected $user;
 
@@ -32,15 +32,16 @@ class CrawlerJob implements ShouldQueue
 
     protected $to;
 
+    protected $type;
 
 
     
-    public function __construct(User $user, $from, $to)
+    public function __construct(User $user, $from, $to, $type)
     {
         $this->user = $user;
         $this->from = $from;
         $this->to = $to;
-
+        $this->type = $type;
     }
 
     /**
@@ -49,11 +50,8 @@ class CrawlerJob implements ShouldQueue
      * @return void
      */
     public function handle()
-    {
-    
-
-        
-        $response = Http::get($this->CRAWLER_URL_PATH . "rule={$this->from}-{$this->to}");
+    {        
+        $response = Http::get($this::CRAWLER_URL_PATH . "{$this->type}=1&rule={$this->from}-{$this->to}");
         sleep(2);
         Log::info('Job completed');
     }

@@ -13,6 +13,7 @@
     <script src="{{ asset('js/device-uuid.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/spin.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.min.js') }}" defer></script>
 
 
 
@@ -105,7 +106,10 @@
             @yield('content')
         </main>
 
-        
+            
+        @section('footerScripts')
+            <script></script>
+        @show
 
     </div>
 </body>
