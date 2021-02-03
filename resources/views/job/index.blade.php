@@ -58,15 +58,13 @@
 <script>
     
     let runJobBtn = document.querySelectorAll('.runJobBtn');
-
+    
     runJobBtn.forEach(job => job.addEventListener('click', function() {
         let tableRow = $(this).parent().parent(); 
-        // console.log(tableRow, this);
         let videosToCrawl = tableRow.find('.videosToCrawl').text();
         let jobsFrom = tableRow.find('.jobsFrom').text();
         let jobsTo = tableRow.find('.jobsTo').text();
         let jobsType = tableRow.find('.jobsType').text();
-        // console.log(jobsFrom);
         $.ajax({
             type:'GET',
             url:`job/${jobsFrom}/${jobsTo}/${jobsType}`,
